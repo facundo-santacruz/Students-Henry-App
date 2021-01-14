@@ -24,7 +24,7 @@ export default function Botones({ navigation }) {
         return (
             <Animated.View style={[{ width: 250, height: 350 },
             { opacity: fadeRegister }]}>
-                <Register />
+                <Register navigation= {navigation}/>
             </Animated.View>
         )
     };

@@ -7,7 +7,7 @@ import { EDIT_USER } from '../apollo/user';
 import { useMutation } from '@apollo/client';
 
 export default function ChangeOnlyPassword ({navigation, route}) {
-    console.log(route.params)
+    
     const [editPassword] = useMutation(EDIT_USER);
 
     const validations = yup.object().shape({
@@ -21,13 +21,12 @@ export default function ChangeOnlyPassword ({navigation, route}) {
 
     const handleSubmit = async (values) => {
         try {
-            const response = await editPassword({
+            await editPassword({
                 variables: {
                     username: route.params.username,
                     password: values.password
                 }
-            })
-            console.log(response);
+            });
             navigation.navigate('PruebaBoton')
         } catch (error) {
             console.log(error);    

@@ -5,7 +5,6 @@ import * as yup from 'yup'
 import { USER_REGISTER } from '../Querys/userQuery.js';
 import {useMutation} from '@apollo/client';
 import { styles } from '../styles/RegisterStyle';
-import Iniciarr from './Login';
 
 export default function Register({navigation}) {
 
@@ -19,8 +18,6 @@ export default function Register({navigation}) {
             .required('Campo obligatorio'),
         lastName: yup.string()
             .max(20, ( {max} ) => `Máximo ${max} caracteres`)
-            .required('Campo obligatorio'),
-        cohorte: yup.string()
             .required('Campo obligatorio'),
         email: yup.string()
             .email('Email no válido')
@@ -42,13 +39,13 @@ export default function Register({navigation}) {
                     username: values.username,
                     firstName: values.firstName,
                     lastName: values.lastName,
-                    cohorte: Number(values.cohorte),
                     email: values.email,
                     password: values.password,
                 }
             })
-            resetForm()
-            setDone("Registro realizado con éxito, porfavor inicie sesión para continuar")
+            resetForm();
+            setDone("Registro realizado con éxito, porfavor inicie sesión para continuar");
+            navigation.navigate('PruebaBoton');
             
         } catch (errors) {
             console.log(errors)
@@ -118,18 +115,7 @@ export default function Register({navigation}) {
                                 {touched.lastName && errors.lastName &&
                                 <Text style={styles.errorForm}>{errors.lastName}</Text>}
 
-                                <View style={{marginTop: 10}}>
-                                    <TextInput 
-                                    placeholder='Cohorte'
-                                    onChangeText={handleChange('cohorte')}
-                                    onBlur={handleBlur('cohorte')}
-                                    value={values.cohorte}
-                                    style={styles.input}/>
-                                </View>
-
-                                {touched.cohorte && errors.cohorte &&
-                                <Text style={styles.errorForm}>{errors.cohorte}</Text>}
-
+                                
                                 <View style={{marginTop: 10}}>
                                     <TextInput 
                                     placeholder='Contraseña'

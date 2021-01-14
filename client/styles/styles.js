@@ -5,12 +5,12 @@ export const styles = StyleSheet.create({
     container:{
         flex: 1,
         alignItems: "center",
-        backgroundColor: `${white}`,
+        backgroundColor: `black`,
         textAlign: "center", 
         justifyContent: 'center'
     },
     body: {
-        backgroundColor: `${white}`,
+        backgroundColor: `black`,
         flex: 1,
         zIndex: -1,
     },
@@ -20,13 +20,15 @@ export const styles = StyleSheet.create({
         fontSize: 30,
         fontWeight: "bold",
         textAlign: "center",
-        zIndex: 10
+        zIndex: 10,
+        color: 'white'
     },
     h2: {
         fontSize: 20,
         textAlign: "center",
         marginTop: 15,
-        marginBottom: 10
+        marginBottom: 10,
+        color: 'white'
     },
     form: {
         flex: 1,
@@ -42,6 +44,7 @@ export const styles = StyleSheet.create({
         width: '80%',
         marginTop: 5,
         justifyContent: "center",
+        backgroundColor: 'white'
     },
     label: {
         color: "grey",
@@ -98,7 +101,7 @@ export const styles = StyleSheet.create({
         marginBottom: 25,
         width: 250,
         height: 60,
-        backgroundColor: '#FFFF01',
+        backgroundColor: 'black',
         borderRadius: 100,
         alignItems: "center",
         justifyContent: "center",

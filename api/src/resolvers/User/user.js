@@ -35,6 +35,9 @@ export const editUsers = async (input) =>{
     if(input.password ){
         const hash = await bcrypt.hash(input.password, 9);
         input.password= hash;
+    }else{
+        await noExist(input.email, "email");
+        await noExist(input.username, "username");
     }
     if(input.image){
         input.image= input.image.toString();
