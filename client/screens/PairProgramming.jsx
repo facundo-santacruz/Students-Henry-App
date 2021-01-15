@@ -10,11 +10,9 @@ import Particles from './Particles';
 import MenuDesplegable from './MenuDesplegable';
 import zzz from '../assets/zzz.png';
 
-export default function Mesas({navigation}){
+export default function Mesas({navigation, route}){
     const fecha = moment().format('DD/MM/YYYY');
-    const idMesa = localStorage.getItem('idMesa')
-    const cohorte = localStorage.getItem('Cohorte');
-    const userName = localStorage.getItem('userName')
+    const {cohorte, username } = route.params.info;
     const { loading, data, error, refetch } = useQuery(GET_MESASCOHORTE, {
         variables: {
             cohorte: cohorte,

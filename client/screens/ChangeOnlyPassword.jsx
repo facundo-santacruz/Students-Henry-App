@@ -5,6 +5,7 @@ import  * as yup from 'yup';
 import { styles } from '../styles/styles';
 import { EDIT_USER } from '../apollo/user';
 import { useMutation } from '@apollo/client';
+import Particles from './Particles';
 
 export default function ChangeOnlyPassword ({navigation, route}) {
     
@@ -34,19 +35,21 @@ export default function ChangeOnlyPassword ({navigation, route}) {
     }
 
     return (
-        <View style={{flex: 1}}>
+        <View style={styles.body} >
             
-            <View style={{width: 270, height: 350}}>
-
+            <View style={{width: '100%', height: '100%', position: 'absolute', zIndex: -1}}>
+                                <Particles />
+            </View>
+            
                 <Formik
                     initialValues={{password: '', repeatPassword: ''}}
                     onSubmit={(values) => handleSubmit(values)}
                     validationSchema={validations}
                 >
                     {({handleChange, handleBlur, handleSubmit, values, errors, touched, isValid}) => (
-                        <View style={{height: 320}}>
+                        <View  display={{display: 'flex', justifyContent:"center", alignItems: 'center', marginLeft: '10%'}}>
                             {/* CAMPO PASSWORD */}
-                            <View style={{marginTop: 10}}>
+                            <View>
                                 <TextInput 
                                 placeholder='Contraseña'
                                 secureTextEntry={true}
@@ -60,7 +63,7 @@ export default function ChangeOnlyPassword ({navigation, route}) {
                             <Text style={styles.errorForm}>{errors.password}</Text>}
 
                             {/* CAMPO REPEAT PASSWORD */}
-                            <View style={{marginTop: 10}}>
+                            <View >
                                 <TextInput 
                                 placeholder='Repite la contraseña'
                                 secureTextEntry={true}
@@ -84,6 +87,5 @@ export default function ChangeOnlyPassword ({navigation, route}) {
                     )}
                 </Formik>
             </View>
-        </View>
     )
 }

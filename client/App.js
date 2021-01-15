@@ -52,7 +52,7 @@ const client = new ApolloClient({
 
 function StackList() {
   return (
-    <Stack.Navigator initialRouteName='Home' screenOptions={{ headerShown: true }}>
+    <Stack.Navigator initialRouteName='Home' screenOptions={{ headerShown:false}}>
       <Stack.Screen name="Home" component={Home} />
       <Stack.Screen name="CohorteList" component={CohorteList} />
       <Stack.Screen name="PruebaBoton" component={IniciaryRegistrar} />
@@ -87,7 +87,7 @@ export default function App() {
       <DripsyProvider theme={theme}>
         <NavigationContainer>
           <Drawer.Navigator 
-            screenOptions={{ headerShown: false }}
+            screenOptions={{ headerShown: true }}
             drawerStyle={{
               backgroundColor: '#fff080'
             }}
@@ -96,11 +96,11 @@ export default function App() {
             }}
           >
             <Drawer.Screen name="<" component={StackList} />
-            <Stack.Screen name="Inicio" component={Welcome} />
+            {/* <Stack.Screen name="Inicio" component={Welcome} /> */}
             {/* {Administrador()} */}
-            <Drawer.Screen name='Admin' component={Admin} />
+            {/* <Drawer.Screen name='Admin' component={Admin} />
             <Drawer.Screen name='Ver Compañeros' component={Compañeros} />
-            <Drawer.Screen name='Instructor del cohorte' component={InstructorProfile} />
+            <Drawer.Screen name='Instructor del cohorte' component={InstructorProfile} /> */}
 
           </Drawer.Navigator>
         </NavigationContainer>

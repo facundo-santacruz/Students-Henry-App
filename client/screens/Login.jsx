@@ -6,8 +6,11 @@ import { useMutation } from '@apollo/client';
 import { styles } from '../styles/LoginStyle'
 import {LOGIN} from '../Querys/userQuery'
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import * as Google from 'expo-google-app-auth';
 
 export default function Login({ navigation }) {
+    
+
 
     const validations = yup.object().shape({
         email: yup.string()

@@ -67,3 +67,11 @@ export const compareCode = async (codigo, email) =>{
     await User.findOneAndUpdate({_id: user._id}, {forgotPassword: -1});
     return User.findOne({_id: user._id});
 }
+
+export const changePassword = (email, password) => {
+    const user = User.updateOne( {email: email}, {password: password});
+    if (!user){
+        throw new Error('El cambio de contraseña no pudo realizarse.');
+    }
+    return User.findOne({email: email})
+}

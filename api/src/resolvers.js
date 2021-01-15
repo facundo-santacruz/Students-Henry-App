@@ -6,7 +6,7 @@ import StandUp from './models/Stand-Up';
 import DailyStand from './models/DailyStand';
 import PairProgramming from './models/PairProgramming';
 import { sendEmail } from './resolvers/Email/sendEmail';
-import { compareCode, editUsers, regUser } from "./resolvers/User/user";
+import { changePassword, compareCode, editUsers, regUser } from "./resolvers/User/user";
 import { forgotPasswordMail } from './resolvers/Email/sendForgotPassword';
 import { addDailyStandUp, addDailyUser, removeDailyUser } from './resolvers/Daily-StandUp/dailyStand';
 import { addUserPairProgramming, removeUserPairProgramming, addLinkMeet } from './resolvers/PairProgramming/pairprogramming';
@@ -34,6 +34,7 @@ const resolvers = {
         registerUser:  (_, {username,firstName, lastName, cohorte,email, password }) => regUser(username, firstName, lastName, cohorte,email, password),
         editUser: async (parent, { input }, context, req) => await editUsers(input),
         removeUser: async (parent, { username }, context) => await  User.findOneAndRemove({"username":username}),
+        changePassword: (_, {email, password}, __) => changePassword(email, password),
 
         //COHORTES
         addCohorte:  (parent, context) => addCohorte(),

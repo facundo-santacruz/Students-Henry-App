@@ -127,6 +127,7 @@ const typeDefs = gql`
 
         editUser( input: UsersInput): Users
         removeUser (username:String): Users
+        changePassword (email:String!, password:String!):Users    
         
         login(email: String!, password: String!): AuthData!
         
