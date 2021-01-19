@@ -121,7 +121,7 @@ export default function Particless() {
                     "retina_detect": true,
                 }}
                 style={{
-                    height: '-webkit-fill-available',
+                    // height: '-webkit-fill-available',
                     width: '100%',
                     objectFit: 'cover'
                 }}

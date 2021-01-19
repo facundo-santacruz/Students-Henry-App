@@ -87,9 +87,6 @@ export default function Botones({ navigation }) {
     return (
         <View style={styles.todo}>
 
-            <View style={{width: '100%', height: '99%', position: 'absolute'}}>
-                <Particles />
-            </View>
             <View style={{zIndex: 10}} >
                 <Image
                     source={require("../assets/logoHenry.png")}

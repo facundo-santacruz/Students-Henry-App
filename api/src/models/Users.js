@@ -18,7 +18,7 @@ const UserSchema = new Schema({
         type: Number,
         default: null
     },
-    adress: {
+    address: {
         type: String
     },
     nationality: {

@@ -33,11 +33,11 @@ export default function Login({ navigation }) {
         const { errors, success, token } = response.data.login;
         if (success) {
             try {
-                AsyncStorage.setItem('token', token);
-                AsyncStorage.setItem('userEmail', values.email);
+                await AsyncStorage.setItem('token', token);
+                await AsyncStorage.setItem('userEmail', values.email);
                 
             } catch (error) {
-                
+                console.log(error)
             }
             navigation.navigate('Welcome');
         } else {
@@ -96,7 +96,7 @@ export default function Login({ navigation }) {
                             </View>
                             
                             <View style={styles.containerBoton}>
-                                <TouchableOpacity onPress={() => { navigation.navigate('ForgotPassword') }} style={styles.olvideContraseña}>
+                                <TouchableOpacity styles={styles.boton} onPress={() => { navigation.navigate('ForgotPassword') }} style={styles.olvideContraseña}>
                                     <Text style={{ color: 'black' }}>Olvide mi contraseña</Text>
                                 </TouchableOpacity>
                             </View>

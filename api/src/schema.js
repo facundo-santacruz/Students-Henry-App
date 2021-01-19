@@ -18,12 +18,13 @@ const typeDefs = gql`
         standUp: String
         listPM: [String]
         image: String
-        adress: String
+        address: String
         nationality: String
         phone: String
     }
 
     input UsersInput {
+        _id:String
         username: String
         firstName: String
         lastName: String
@@ -35,7 +36,7 @@ const typeDefs = gql`
         email: String
         password: String
         image: String
-        adress: String
+        address: String
         nationality: String
         phone: String
     }

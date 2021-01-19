@@ -20,7 +20,7 @@ const Profile = ({ route, navigation }) => {
     
     console.log(data)
     const handleProfileEdit = () => {
-        navigation.navigate('ProfileEdit', { data: data.users[0] })
+        navigation.navigate('ProfileEdit', { data: data.users[0]})
     };
     if(loading){
         return (
@@ -37,25 +37,23 @@ const Profile = ({ route, navigation }) => {
                 <View style={{width: 50, position: 'absolute', zIndex: 5}}>
                     <MenuDesplegable navigation={navigation} />
                 </View>
-                <View style={{width: '100%', height: '-webkit-fill-available', position: 'absolute', zIndex: -1}}>
-                    <Particles />
-                </View>
                 <View style={styles.userInfoSection}>
-                    <View style={{ flexDirection: 'row', marginTop: 15 }}>
+                    <View style={{ flexDirection: 'row', marginTop: 20, display: "flex", justifyContent: "center"  }}>
                         <Avatar.Image
                             size={200}
-                            source={image || "https://www.gravatar.com/avatar/205e460b479e2e5b48aec07710c08d50" }
+                            source={image || `https://cdn.theorg.com/d3119e0e-8202-4034-85ce-d0356382515e_thumb.jpg` }
                         />
-                        <View style={{ marginLeft: 20 }}>
-                            <Title style={[styles.title, {
-                                marginTop: 15,
-                                marginBottom: 5,
-                            }]}>{firstName}</Title>
-                            <Caption style={styles.caption}>{username}</Caption>
-                        </View>
                     </View>
                 </View>
                 <View style={styles.userInfoSection}>
+                    <View style={styles.row}>
+                        <Icon name="account" color="#3b3b3b" size={20} />
+                        <Text style={{ color: "#777777", marginLeft: 20 }}>{username}</Text>
+                    </View>
+                    <View style={styles.row}>
+                        <Icon name="card-account-details" color="#3b3b3b" size={20} />
+                        <Text style={{ color: "#777777", marginLeft: 20 }}>{firstName} {lastName}</Text>
+                    </View>
                     <View style={styles.row}>
                         <Icon name="map-marker-radius" color="#3b3b3b" size={20} />
                         <Text style={{ color: "#777777", marginLeft: 20 }}>{nationality || "Argentina"}</Text>
@@ -72,7 +70,7 @@ const Profile = ({ route, navigation }) => {
                 <View style={styles.userInfoSection}>
                     <TouchableOpacity style={styles.btn} onPress={handleProfileEdit}>
                         <View style={styles.row}>
-                            <Icon name="account-edit" style={{ color: '#000000' }} size={20} />
+                            <Icon name="account-edit" style={{ color: '#000000' }} size={30} />
                             <Text style={{ marginLeft: 20, color: '#000000', fontWeight: 'bold' }}>Editar Perfil</Text>
                         </View>
                     </TouchableOpacity>

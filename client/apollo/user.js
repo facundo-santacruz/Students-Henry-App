@@ -3,6 +3,7 @@ import { gql } from '@apollo/client';
 export const GET_USER = gql`
     query Users($email: String) {
         users(where: {email: $email}) {
+            _id
             username
             firstName
             lastName
@@ -39,8 +40,9 @@ export const USER_REGISTER = gql`
         }
     }`;
 
-export const EDIT_USER = gql`mutation editUser($username: String, $lastName: String, $firstName: String, $cohorte: Int, $email: String, $nationality: String, $phone: String, $password: String) {
+export const EDIT_USER = gql`mutation editUser($_id:String, $username: String, $lastName: String, $firstName: String, $cohorte: Int, $email: String, $nationality: String, $phone: String, $password: String) {
 	    editUser (input: {
+            _id: $_id
             username: $username
             lastName: $lastName
 		    firstName: $firstName
@@ -50,6 +52,7 @@ export const EDIT_USER = gql`mutation editUser($username: String, $lastName: Str
             phone: $phone
             password: $password
         }){
+            _id
             username
             firstName
             lastName

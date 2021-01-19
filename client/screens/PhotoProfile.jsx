@@ -1,10 +1,13 @@
 import React, { useState } from 'react';
-import { View, Button, Image } from 'react-native';
+import { View, Button, Image, Text } from 'react-native';
 import * as ImagePicker from 'expo-image-picker';
 import Constants from 'expo-constants';
 import * as Permissions from 'expo-permissions';
 import { useMutation } from '@apollo/client';
 import { EDIT_USER } from '../Querys/userQuery';
+import { TouchableOpacity } from 'react-native-gesture-handler';
+import { styles } from '../styles/ProfileEditStyles';
+import { GET_USER } from '../apollo/user';
 
 export default function PhotoProfile({ route, navigation }) {
 
@@ -18,13 +21,12 @@ export default function PhotoProfile({ route, navigation }) {
             const response = await editProfile({
                 variables: {
                     image: image,
-                    username: route.params.data.username
-                }
+                    _id: route.params.data._id
+                },
+                refetchQueries: [{query: GET_USER, variables: {email: route.params.data.email}}]
             });
             navigation.navigate('Profile', {
-                profileData: {
-                    users: [response.data?.editUser],
-                }
+                email: route.params.data.email
             })
         } catch (error) {
             console.log(error);
@@ -77,27 +79,34 @@ export default function PhotoProfile({ route, navigation }) {
         }
     }
     return (
-        <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-            {image && <Image source={{ uri: image }} style={{borderRadius:100, width: 200, height: 200 }} />}
-            <Button
-                title="Seleccionar Imagen"
+        <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center', backgroundColor: "black" }}>
+            {image && <Image source={{ uri: image }} style={{borderRadius:100, width: 200, height: 200, marginBottom:10 }} />}
+            <TouchableOpacity
+                style={styles.boton}
                 icon="add-a-photo" mode="contained"
                 onPress={_pickImage}
-                />
+                >
+                    <Text style={{fontColor:"black"}}>Seleccionar Imagen</Text>
+                </TouchableOpacity>
                 {!Constants.platform.web ? 
-                    <Button
-                        title="Tomar Foto"
+                    <TouchableOpacity
+                        style={styles.boton}
                         icon="add-a-photo" mode="contained"
                         onPress={ takePhoto }
-                    /> 
-                : null }
+                    >
+                        <Text style={{fontColor:"black"}}>Tomar Foto</Text>
+                    </TouchableOpacity>
+                    : null }
                 
-            <Button
-                title="Aceptar"
+            <TouchableOpacity
+                style={styles.boton}
                 mode="contained"
                 onPress={ handleSubmit }
                 disabled={!bool}
-                />
+            >
+                <Text style={{fontColor:"black"}}>Aceptar</Text>
+            </TouchableOpacity>
+        
         </View>
     );
 }

@@ -38,6 +38,6 @@ export const styles = StyleSheet.create({
     },
     errorMessage: {
         color: "red",
-        fontFamily: "-webkit-pictograph"
+        // fontFamily: "-webkit-pictograph"
     },
 })

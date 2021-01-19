@@ -9,106 +9,42 @@ import moment from 'moment';
 import Particles from './Particles';
 import MenuDesplegable from './MenuDesplegable';
 import zzz from '../assets/zzz.png';
+import { GET_USER } from '../apollo/user';
+import { ActivityIndicator } from 'react-native';
 
 export default function Mesas({navigation, route}){
     const fecha = moment().format('DD/MM/YYYY');
-    const {cohorte, username } = route.params.info;
-    const { loading, data, error, refetch } = useQuery(GET_MESASCOHORTE, {
+    const { email } = route.params;
+    const { loading, data1, error, refetch } = useQuery(GET_USER, {
         variables: {
-            cohorte: cohorte,
-            dia: fecha
+            email
         }
     })
-    
-    const [addUserPairProgramming] = useMutation(ADD_USERMESA);
-    const handleSubmit = async () => {
-        const response = await addUserPairProgramming({
+
+    if(data1){
+        const { loading, data, error, refetch } = useQuery(GET_MESASCOHORTE, {
             variables: {
-                username: userName,
+                cohorte: data1.user[0].cohorte,
+                dia: fecha
             }
         })
-        const id = response.data.addUserPairProgramming._id
-        localStorage.setItem('idMesa', id);
-        navigation.navigate('SalaDeMesa');
-    }
-
-    const [btn, setBtn] = useState(false)
-    const btnMesa = () => {
-        var count = 0;
-        data?.pairProgramming.map((u,i) => {
-            count += 1
-        })
-        // var count2 = data?.pairProgramming[count - 1].users.length || 0
-        if(count % 5 === 0) {
-            return (
-                <View style={styles.container}>
-                    <View style={styles.botonSalaVacia} sx={{width: [250, 400], height: [50, 70]}}>
-                        <TouchableOpacity onPress={handleSubmit}>
-                            <Text style={{textAlign: 'center', fontWeight: 'bold'}} sx={{fontSize: [15, 22]}}>Crear Mesa</Text>
-                        </TouchableOpacity>
-                    </View>
+        if (data){
+            return(
+                <View>
+                    {/* <Text>{data?.}</Text> */}
                 </View>
             )
         }
-    }
-    const [mesas, setMesas] = useState()
-    function onRefresh() {
-        var mesasActuales = []
-        data && data?.pairProgramming.map((m, i) => {
-            mesasActuales.push(m)
-        })
-        setMesas(mesasActuales)
-        refetch()
-    }
-
-    useEffect(() => {
-        refetch
-        onRefresh()
-    }, [data && data?.pairProgramming.length])
-
-    useEffect(() => {
-        refetch()
-    })
-
-    function Sala () {
-        if (data?.pairProgramming.length === 0){
-            return (
-                <View style={styles.container2}>
-                    <Text sx={{fontSize: [30, 50], fontWeight: 'bold', textAlign: 'center', color: "white"}}>Sala Vacia</Text>
-                    <View style={{width: 150, height: 150, marginTop: 40}}>
-                        <Image source={zzz} style={{width: 150, height: 150}}/>
-                    </View>
-                </View>
-            )
-        }
-        else return (
-            <View >  
-                <Text sx={{fontSize: [30, 50], fontWeight: 'bold', textAlign: 'center', color: "white"}}>Salas</Text>
-                {
-                    mesas && mesas.map((m, i) => {
-                        i += 1
-                        return <Mesa key={i} navigation={navigation} users={m.users} id={m._id} cant={i}/>
-                    })
-                }
-            </View>
-        )
-    }
-    
-    function mostrar(){
-        if(!idMesa){
-            return Sala()
-        }
-        else return navigation.navigate('SalaDeMesaNew')   
-    }
-    
-    return(
-        <View style={styles.todo}>
-            <MenuDesplegable navigation={navigation}/>
-            <View style={{width: '100%', height: '99%', position: 'absolute', zIndex: -1}}>
-                <Particles />
-            </View>
-            {mostrar()}
-            {btnMesa()}
+    }else if(loading){
+        return (
+            <View style= {{flex: 1, justifyContent: "center", flexDirection: "row", padding: 10, backgroundColor: 'black'}}>
+                <ActivityIndicator size={50} color="yellow" />
+            </View>)
+    }else if (error){
+        <View>
+            <Text>{error.message}</Text>
         </View>
-    )
+    }
+    
+    
 }

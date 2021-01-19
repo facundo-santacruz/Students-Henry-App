@@ -29,15 +29,20 @@ export const regUser = async (username,firstName, lastName, cohorte,email, passw
 }
 
 export const editUsers = async (input) =>{
+    const id = input._id;
+    const user = await User.findOne({ id });
     if(input.cohorte === 0){
         input.cohorte = null;
     }
     if(input.password ){
         const hash = await bcrypt.hash(input.password, 9);
         input.password= hash;
-    }else{
+    }if(!input.email && input.email !== user.email){
         await noExist(input.email, "email");
+    }
+    if(input.username && input.username !== user.username){
         await noExist(input.username, "username");
+    
     }
     if(input.image){
         input.image= input.image.toString();
@@ -48,9 +53,9 @@ export const editUsers = async (input) =>{
             throw new Error('No se puede volver a cohortes anteriores')
         }
         input.cohorte = cohorte.number;
-    }
-    await  User.findOneAndUpdate({ "username": input.username }, input);
-    return await User.findOne({username: input.username});
+    };
+    await  User.findOneAndUpdate({ _id: id }, input);
+    return await User.findOne({_id: id});
 }
 
 export const compareCode = async (codigo, email) =>{
@@ -68,10 +73,11 @@ export const compareCode = async (codigo, email) =>{
     return User.findOne({_id: user._id});
 }
 
-export const changePassword = (email, password) => {
+export const changePassword = async (email, password) => {
+    password = await bcrypt.hash(password, 9);
     const user = User.updateOne( {email: email}, {password: password});
     if (!user){
         throw new Error('El cambio de contraseña no pudo realizarse.');
     }
-    return User.findOne({email: email})
+    return User.findOneAndUpdate({email: email},{password})
 }

@@ -8,7 +8,6 @@ import { useQuery, useMutation } from '@apollo/client';
 import {styles} from '../styles/WelcomeStyle';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import Menu from './MenuDesplegable';
-import Particles from './Particles';
 import moment from 'moment';
 
 export default function Welcome({ navigation }) {
@@ -77,9 +76,6 @@ export default function Welcome({ navigation }) {
         const { firstName, lastName, username } = data?.users[0]
         return (
             <View style={styles.todo}>
-                <View style={{width: '100%', height: '100%', position: 'absolute', zIndex: -1}}>
-                    <Particles />
-                </View>
                 <View style={{zIndex: 5}}>
                     <Menu navigation={navigation} />
                 </View>
@@ -100,7 +96,7 @@ export default function Welcome({ navigation }) {
                         </TouchableOpacity>
                     </View>
                     <View style={styles.boton} sx={{ width: [300, 600], height: [130, 200] }}>
-                        <TouchableOpacity>
+                        <TouchableOpacity onPress={() => navigation.navigate('PairProgramming', { email })}>
                             <Image
                                 source={require("../assets/PairPrograming.jpg")}
                                 style={styles.tarjeta} sx={{ width: [300, 600], height: [130, 200] }}
