@@ -41,7 +41,7 @@ const Profile = ({ route, navigation }) => {
                     <View style={{ flexDirection: 'row', marginTop: 20, display: "flex", justifyContent: "center"  }}>
                         <Avatar.Image
                             size={200}
-                            source={image || `https://cdn.theorg.com/d3119e0e-8202-4034-85ce-d0356382515e_thumb.jpg` }
+                            source={{uri: image}}
                         />
                     </View>
                 </View>

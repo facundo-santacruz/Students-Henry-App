@@ -62,7 +62,7 @@ const ProfileEdit = ({ route, navigation }) => {
                             phone: data.phone || '',
                             cohorte: data.cohorte || '',
                             nroTelefono: data.phone || '',
-                            image: data.image || `https://cdn.theorg.com/d3119e0e-8202-4034-85ce-d0356382515e_thumb.jpg`,
+                            image: data.image
                         }}
                         onSubmit={values => handleSubmit(values)}
                     >
@@ -71,9 +71,9 @@ const ProfileEdit = ({ route, navigation }) => {
                                 <View style={{ display: "flex", justifyContent: "center", marginBottom:20}}>
                                     <Avatar.Image
                                         size={200}
-                                        source={values.image}
+                                        source={{uri: values.image}}
                                     />
-                                    <TouchableOpacity style={styles.boton} onPress={() => navigation.navigate('PhotoProfile',{ data })}>
+                                    <TouchableOpacity style={styles.boton} onPress={() => navigation.navigate('PhotoProfile', {data: data} )}>
                                             <Text style={{ color: 'black', fontWeight: 'bold' }}>Cambiar Imagen</Text>
                                     </TouchableOpacity>
                                 </View>

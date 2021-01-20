@@ -87,7 +87,7 @@ export default function App() {
       <DripsyProvider theme={theme}>
         <NavigationContainer>
           <Drawer.Navigator 
-            screenOptions={{ headerShown: false }}
+            screenOptions={{ headerShown: true }}
             drawerStyle={{
               backgroundColor: '#fff080'
             }}

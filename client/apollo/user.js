@@ -40,7 +40,7 @@ export const USER_REGISTER = gql`
         }
     }`;
 
-export const EDIT_USER = gql`mutation editUser($_id:String, $username: String, $lastName: String, $firstName: String, $cohorte: Int, $email: String, $nationality: String, $phone: String, $password: String) {
+export const EDIT_USER = gql`mutation editUser($_id:String, $username: String, $lastName: String, $firstName: String, $cohorte: Int, $email: String, $nationality: String, $phone: String, $password: String, $image:String) {
 	    editUser (input: {
             _id: $_id
             username: $username
@@ -51,6 +51,7 @@ export const EDIT_USER = gql`mutation editUser($_id:String, $username: String, $
             nationality: $nationality
             phone: $phone
             password: $password
+            image:$image
         }){
             _id
             username

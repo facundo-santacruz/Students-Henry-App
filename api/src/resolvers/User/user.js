@@ -30,14 +30,18 @@ export const regUser = async (username,firstName, lastName, cohorte,email, passw
 
 export const editUsers = async (input) =>{
     const id = input._id;
-    const user = await User.findOne({ id });
+    console.log(input.image)
+    const user = await User.findOne({_id: id });
+    console.log(id);
     if(input.cohorte === 0){
         input.cohorte = null;
     }
     if(input.password ){
         const hash = await bcrypt.hash(input.password, 9);
         input.password= hash;
-    }if(!input.email && input.email !== user.email){
+    }
+        console.log(input.email !== user.email);
+    if(input.email && input.email !== user.email){
         await noExist(input.email, "email");
     }
     if(input.username && input.username !== user.username){
