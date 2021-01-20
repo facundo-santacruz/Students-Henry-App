@@ -3,7 +3,6 @@ import { View, TouchableOpacity } from 'react-native';
 import { styles } from '../styles/HomeStyle'
 import { Text, Image } from 'dripsy';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import Particles from './Particles';
 
 export default function Home({ navigation }) {
 
@@ -22,9 +21,7 @@ export default function Home({ navigation }) {
 
     return (
         <View style={styles.todo}>
-            <View style={{width: '100%', height: '99%', position: 'absolute', zIndex: 1}}>
-                <Particles />
-            </View>
+            
             <View style={styles.container}>
                 <Image
                     source={require("../assets/henry.png")}

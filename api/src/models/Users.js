@@ -18,7 +18,7 @@ const UserSchema = new Schema({
         type: Number,
         default: null
     },
-    adress: {
+    address: {
         type: String
     },
     nationality: {
@@ -64,6 +64,7 @@ const UserSchema = new Schema({
     },
     image: {
         type: String,
+        default: `https://cdn.theorg.com/d3119e0e-8202-4034-85ce-d0356382515e_thumb.jpg`
     }
 })
 

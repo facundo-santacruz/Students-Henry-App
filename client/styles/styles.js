@@ -42,7 +42,8 @@ export const styles = StyleSheet.create({
         borderColor: 'yellow',
         height: 30,
         width: '80%',
-        marginTop: 5,
+        marginTop: 15,
+        marginBottom: 30,
         justifyContent: "center",
         backgroundColor: 'white'
     },
@@ -63,8 +64,7 @@ export const styles = StyleSheet.create({
         width: '80%',
         alignItems: "center",
         justifyContent: "center",
-        marginTop: 20,
-        marginBottom: 20
+        marginBottom: 10
     },
     linkForm: {
         color: "grey",

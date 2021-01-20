@@ -4,12 +4,15 @@ export const styles = StyleSheet.create({
     container: {
         flex: 1,
         backgroundColor: 'black',
+        
     },
     btn: {
         backgroundColor: '#FFFF01',
         color: '#fff',
         padding: 10,
         borderRadius: 5,
+        display: "flex",
+        justifyContent: "center"
     },
     userNavigation: {
         flex: 1,

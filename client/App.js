@@ -41,7 +41,7 @@ const Stack = createStackNavigator();
 const Drawer = createDrawerNavigator();
 
 const client = new ApolloClient({
-  uri: `http://localhost:5000/graphql`,
+  uri: `http://192.168.1.13:5000/graphql`,
   cache: new InMemoryCache({resultCaching: false}),
   onError: ({ networkError, graphQLErrors }) => {
     console.log('graphQLErrors', graphQLErrors)
@@ -52,7 +52,7 @@ const client = new ApolloClient({
 
 function StackList() {
   return (
-    <Stack.Navigator initialRouteName='Home' screenOptions={{ headerShown: true }}>
+    <Stack.Navigator initialRouteName='Home' screenOptions={{ headerShown:false}}>
       <Stack.Screen name="Home" component={Home} />
       <Stack.Screen name="CohorteList" component={CohorteList} />
       <Stack.Screen name="PruebaBoton" component={IniciaryRegistrar} />
@@ -87,7 +87,7 @@ export default function App() {
       <DripsyProvider theme={theme}>
         <NavigationContainer>
           <Drawer.Navigator 
-            screenOptions={{ headerShown: false }}
+            screenOptions={{ headerShown: true }}
             drawerStyle={{
               backgroundColor: '#fff080'
             }}

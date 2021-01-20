@@ -6,6 +6,7 @@ import { styles } from '../styles/styles';
 import { COMPARE_CODE } from '../apollo/user';
 import { useMutation } from '@apollo/client';
 import { PanResponder } from 'react-native';
+import Particless from './Particles';
 
 export default function CompareCode ({navigation, route}) {
     console.log(route.params)
@@ -35,12 +36,9 @@ export default function CompareCode ({navigation, route}) {
     return (
         <>
         <View style={styles.header}>
-            <Image
-                source={require("../assets/logoHenry.png")}
-                resizeMode="contain"
-                style={styles.imgHenry}
-                onPress={() => navigation.navigate('Home'), {}}
-            ></Image>
+            <View style={{width: '100%', height: '99%', position: 'absolute'}}>
+                <Particless />
+            </View>
             
         </View>
         <View style={styles.body}>
@@ -57,6 +55,7 @@ export default function CompareCode ({navigation, route}) {
                         onChangeText={handleChange('code')}
                         onBlur={handleBlur('code')}
                         value={values.code}
+                        placeholder="Ingrese aquí"
                     />
                     {touched.code && errors.code &&
                     <Text style={styles.error}>{errors.code}</Text>}                    
@@ -65,7 +64,7 @@ export default function CompareCode ({navigation, route}) {
                         <Text style={styles.linkForm} >Confirmar</Text>
                     </TouchableOpacity>
                     
-                    <TouchableOpacity onPress={() => navigation.navigate('PruebaBoton')}>
+                    <TouchableOpacity style={styles.boton} onPress={() => navigation.navigate('PruebaBoton')}>
                         <Text style={styles.linkForm}>Volver</Text>
                     </TouchableOpacity>    
                 </View>

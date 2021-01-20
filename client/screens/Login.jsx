@@ -6,8 +6,11 @@ import { useMutation } from '@apollo/client';
 import { styles } from '../styles/LoginStyle'
 import {LOGIN} from '../Querys/userQuery'
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import * as Google from 'expo-google-app-auth';
 
 export default function Login({ navigation }) {
+    
+
 
     const validations = yup.object().shape({
         email: yup.string()
@@ -30,11 +33,11 @@ export default function Login({ navigation }) {
         const { errors, success, token } = response.data.login;
         if (success) {
             try {
-                AsyncStorage.setItem('token', token);
-                AsyncStorage.setItem('userEmail', values.email);
+                await AsyncStorage.setItem('token', token);
+                await AsyncStorage.setItem('userEmail', values.email);
                 
             } catch (error) {
-                
+                console.log(error)
             }
             navigation.navigate('Welcome');
         } else {
@@ -93,7 +96,7 @@ export default function Login({ navigation }) {
                             </View>
                             
                             <View style={styles.containerBoton}>
-                                <TouchableOpacity onPress={() => { navigation.navigate('ForgotPassword') }} style={styles.olvideContraseña}>
+                                <TouchableOpacity styles={styles.boton} onPress={() => { navigation.navigate('ForgotPassword') }} style={styles.olvideContraseña}>
                                     <Text style={{ color: 'black' }}>Olvide mi contraseña</Text>
                                 </TouchableOpacity>
                             </View>
