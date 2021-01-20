@@ -15,10 +15,7 @@ const ProfileEdit = ({ route, navigation }) => {
 
     const [data, setData] = useState(route.params.data);
     const [editProfile] = useMutation(EDIT_USER);
-    console.log(data)
     const handleSubmit = async (values) => {
-        console.log(data._id);
-        console.log(values)
         try {
             const response = await editProfile({
                 variables: {

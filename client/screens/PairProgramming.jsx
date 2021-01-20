@@ -14,37 +14,47 @@ import { ActivityIndicator } from 'react-native';
 
 export default function Mesas({navigation, route}){
     const fecha = moment().format('DD/MM/YYYY');
-    const { email } = route.params;
-    const { loading, data1, error, refetch } = useQuery(GET_USER, {
+    const { email, cohorte, username } = route.params.data;
+    
+
+    //AGREGAR NUEVO USUARIO
+    const [addUserPairProgramming] = useMutation(ADD_USERMESA);
+    const handleSubmit = async () => {
+        const response = await addUserPairProgramming({
+            variables: {
+                username,
+            }
+        })
+        console.log(response.data.addUserPairProgramming);
+        navigation.navigate('SalaDeMesa', {data: response.data.addUserPairProgramming});
+    }
+
+    //AL INICIAR BUSCA SI EXISTE ALGUNA MESA
+    const { loading, data, error } = useQuery(GET_MESASCOHORTE, {
         variables: {
-            email
+            cohorte:cohorte,
+            dia: fecha
         }
     })
 
-    if(data1){
-        const { loading, data, error, refetch } = useQuery(GET_MESASCOHORTE, {
-            variables: {
-                cohorte: data1.user[0].cohorte,
-                dia: fecha
-            }
-        })
-        if (data){
-            return(
-                <View>
-                    {/* <Text>{data?.}</Text> */}
-                </View>
-            )
-        }
+
+    if (data){
+        console.log(data);
+        handleSubmit()
+        
     }else if(loading){
         return (
             <View style= {{flex: 1, justifyContent: "center", flexDirection: "row", padding: 10, backgroundColor: 'black'}}>
                 <ActivityIndicator size={50} color="yellow" />
             </View>)
     }else if (error){
+
+        console.log(error);
+        return(
         <View>
             <Text>{error.message}</Text>
         </View>
-    }
+    )}
     
     
 }

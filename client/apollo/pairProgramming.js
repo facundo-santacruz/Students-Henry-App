@@ -13,7 +13,7 @@ query Mesas{
 }`;
 
 export const GET_MESASCOHORTE = gql`
-query pairProgramming($cohorte: String!, $dia: String! ){
+query PairProgramming($cohorte: Int, $dia: String! ){
     pairProgramming(where: {cohorte: $cohorte, dia: $dia }){
         _id
         users {
@@ -27,20 +27,22 @@ query pairProgramming($cohorte: String!, $dia: String! ){
 }`;
 
 export const ADD_USERMESA = gql`
-mutation addUserPairProgramming($username: String!, $id: String){
-    addUserPairProgramming(
-        username: $username,
-        id: $id
-    ){
-        users{
-            username
-        }
-        _id
+  mutation addUserPairProgramming($username: String){
+    addUserPairProgramming(username: $username){
+      _id
+      linkMeet
+      users{
+        username 
+        firstName
+        lastName
+        cohorte
+      }
+      dia
     }
 }`;
 
 export const GET_MESA = gql`
-query pairProgramming($id: String){
+query PairProgramming($id: String){
     pairProgramming(where: {_id: $id}){
       users{
         firstName

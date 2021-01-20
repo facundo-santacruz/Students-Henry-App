@@ -2,7 +2,8 @@ import moment from 'moment'
 import User from '../../models/Users';
 import PairProgramming from '../../models/PairProgramming';
 
-export const addUserPairProgramming = async(username, id) => {
+export const addUserPairProgramming = async(username) => {
+    console.log(username)
     const fecha = moment(moment.now()).format("DD/MM/YYYY");
     //Veo Si existe el Usuario
     const user = await User.findOne({"username": username});
@@ -15,27 +16,18 @@ export const addUserPairProgramming = async(username, id) => {
     const existsUser = await PairProgramming.find({users: user._id, cohorte: user.cohorte, dia: fecha});
     // console.log(existUser[0]);
     if (existsUser[0]){
-        throw new Error("El usuario ya ha sido agregado a un grupo de Pair Programming")
+        return await PairProgramming.findOne({_id:existsUser[0]._id}).populate('users');
     }
     //Buscar si hay una mesa del mismo cohorte con menos de 5 personas
-    var resp;
-    if(id){
-        resp = await PairProgramming.findOneAndUpdate({_id: id}, {
+    var resp = await PairProgramming.findOne(({users : {"$not":{"$size":5}}, dia: fecha, cohorte: user.cohorte}));
+    if(!resp){
+        resp = await PairProgramming.create({cohorte: user.cohorte, users: [user._id]})
+    }else{
+        await PairProgramming.findOneAndUpdate({_id: resp._id}, {
             $push: {
                 users: user._id
             }
         })
-    }else{ 
-        resp = await PairProgramming.findOne(({users : {"$not":{"$size":5}}, dia: fecha, cohorte: user.cohorte}));
-        if(!resp){
-            resp = await PairProgramming.create({cohorte: user.cohorte, linkMeet: "", users: [user._id]})
-        }else{
-            await PairProgramming.findOneAndUpdate({_id: resp._id}, {
-                $push: {
-                    users: user._id
-                }
-            })
-        }
     }
     return await PairProgramming.findOne({_id:resp._id}).populate('users')
 }

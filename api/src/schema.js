@@ -62,7 +62,7 @@ const typeDefs = gql`
     }
     
     type PairProgramming {
-        _id:String
+        _id:ID
         dia: String
         cohorte: Int
         users: [Users]
@@ -138,7 +138,7 @@ const typeDefs = gql`
         removeUserCohorte(username:String!):Cohortes!
         addInstructor(username:String, cohorte:Int): Cohortes
 
-        addUserPairProgramming(username:String!, id: String):PairProgramming
+        addUserPairProgramming(username:String):PairProgramming
         removeUserPairProgramming(username:String!, dia: String!):PairProgramming
         addLinkMeet(id:String!,link:String!):PairProgramming
 

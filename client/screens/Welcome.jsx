@@ -12,7 +12,6 @@ import moment from 'moment';
 
 export default function Welcome({ navigation }) {
     const [email, setEmail] = useState(null);
-
     useEffect(() => {
         const thereIsEmail = async () => {
             try{
@@ -73,7 +72,7 @@ export default function Welcome({ navigation }) {
             <ActivityIndicator size={50} color="yellow" />
         </View>)
     } else {
-        const { firstName, lastName, username } = data?.users[0]
+        const { firstName, lastName, username, cohorte } = data?.users[0]
         return (
             <View style={styles.todo}>
                 <View style={{zIndex: 5}}>
@@ -96,7 +95,11 @@ export default function Welcome({ navigation }) {
                         </TouchableOpacity>
                     </View>
                     <View style={styles.boton} sx={{ width: [300, 600], height: [130, 200] }}>
-                        <TouchableOpacity onPress={() => navigation.navigate('PairProgramming', { email })}>
+                        <TouchableOpacity onPress={() => navigation.navigate('SalaDeMesa', { data: {
+                            email,  
+                            cohorte,
+                            username 
+                        }})}>
                             <Image
                                 source={require("../assets/PairPrograming.jpg")}
                                 style={styles.tarjeta} sx={{ width: [300, 600], height: [130, 200] }}

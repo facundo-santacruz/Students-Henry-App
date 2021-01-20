@@ -74,26 +74,18 @@ export default function SalaDeMesaNew({navigation}) {
         data?.pairProgramming[0].users.map((u, i) => {
             usuarios.push(u)
         })
-        refetch()
         setUsers(usuarios)
     }
     
     //PARA OBTENER LOS DATOS ACTUALIZADOS DE LA API
     useEffect(() => {
-        // refetch()
         mapUsers()
     }, [data && data?.pairProgramming[0].users.length])
 
-    useEffect(() => {
-        refetch()
-    })
+    
 
     return (
         <View style={styles.todo}>
-            <View style={{width: '100%', height: '99%', position: 'absolute', zIndex: -1}}>
-                <Particles />
-            </View>
-
             <View>
                 <View style={{borderBottomColor: "yellow", borderWidth: 10}}>
                     <Text style={{color: "white", fontSize: 50, fontWeight: "bold"}}>

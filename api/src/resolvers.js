@@ -49,7 +49,7 @@ const resolvers = {
         },
 
         //PAIR-PROGRAMMING / MESAS
-        addUserPairProgramming: async (_ , {username, id}) => await addUserPairProgramming(username, id),
+        addUserPairProgramming: async (_ , {username}) => await addUserPairProgramming(username),
         removeUserPairProgramming: async (_ , {username, dia}) => await removeUserPairProgramming(username, dia),
         addLinkMeet: (_, {id, link}, context) => addLinkMeet(id, link),
         
