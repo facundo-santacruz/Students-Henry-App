@@ -7,7 +7,7 @@ export const styles = StyleSheet.create({
         width:200,
         borderWidth: 0.5,
         borderColor: '#dbdbdb',
-        backgroundColor: 'white',
+        backgroundColor: 'gray',
         borderRadius: 20,
         margin: 15,
         shadowColor: "gray",
@@ -17,7 +17,7 @@ export const styles = StyleSheet.create({
         },
         shadowOpacity: 0.32,
         shadowRadius: 5.46,
-        elevation: 9,
+        elevation: 9
     },
     todo:{
         marginTop: 15,
@@ -56,5 +56,10 @@ export const styles = StyleSheet.create({
         height: 30,
         padding: 10,
         borderColor: '#0000005c'
+    },
+    imagen: {
+        width: 100, 
+        height: 100, 
+        borderRadius: 100
     }
 })

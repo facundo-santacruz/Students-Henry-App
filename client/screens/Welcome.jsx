@@ -9,6 +9,7 @@ import {styles} from '../styles/WelcomeStyle';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import Menu from './MenuDesplegable';
 import moment from 'moment';
+import { ScrollView } from 'react-native-gesture-handler';
 
 export default function Welcome({ navigation }) {
     const [email, setEmail] = useState(null);
@@ -75,63 +76,66 @@ export default function Welcome({ navigation }) {
         const { firstName, lastName, username, cohorte } = data?.users[0]
         return (
             <View style={styles.todo}>
-                <View style={{zIndex: 5}}>
-                    <Menu navigation={navigation} />
-                </View>
-                <Text style={styles.title} sx={{fontSize: [30, 50]}}>{`Bienvenido ${firstName} ${lastName}!`}</Text>
-                <View style={styles.container}>
-                    <View style={styles.boton} sx={{ width: [300, 600], height: [130, 200] }}>
-                        <TouchableOpacity onPress={() => navigation.navigate('Profile', { email })}>
-                            <Image
-                                source={require("../assets/materialEstudio2.jpg")}
-                                style={styles.tarjeta} sx={{ width: [300, 600], height: [130, 200] }}
-                            >
-                            </Image>
-                            <View style={{ width: '100%', justifyContent: 'center' }} sx={{ height: [130, 200] }}>
-                                <Text style={{ fontWeight: 'bold', fontSize: 30, textAlign: 'center', color: 'white' }}>
-                                    Perfil
-                                </Text>
-                            </View>
-                        </TouchableOpacity>
+                <ScrollView>
+
+                    <View style={{zIndex: 5}}>
+                        <Menu navigation={navigation} />
                     </View>
-                    <View style={styles.boton} sx={{ width: [300, 600], height: [130, 200] }}>
-                        <TouchableOpacity onPress={() => navigation.navigate('SalaDeMesa', { data: {
-                            email,  
-                            cohorte,
-                            username 
-                        }})}>
-                            <Image
-                                source={require("../assets/PairPrograming.jpg")}
-                                style={styles.tarjeta} sx={{ width: [300, 600], height: [130, 200] }}
-                            >
-                            </Image>
-                            <View style={{ width: '100%', justifyContent: 'center' }} sx={{ height: [130, 200] }}>
-                                <Text style={{ fontWeight: 'bold', fontSize: 30, textAlign: 'center', color: 'white' }}>
-                                    Pair Programing
-                                </Text>
-                            </View>
-                        </TouchableOpacity>
+                    <Text style={styles.title} sx={{fontSize: [30, 50]}}>{`Bienvenido ${firstName} ${lastName}!`}</Text>
+                    <View style={styles.container}>
+                        <View style={styles.boton} sx={{ width: [300, 600], height: [130, 200] }}>
+                            <TouchableOpacity onPress={() => navigation.navigate('Profile', { email })}>
+                                <Image
+                                    source={require("../assets/materialEstudio2.jpg")}
+                                    style={styles.tarjeta} sx={{ width: [300, 600], height: [130, 200] }}
+                                >
+                                </Image>
+                                <View style={{ width: '100%', justifyContent: 'center' }} sx={{ height: [130, 200] }}>
+                                    <Text style={{ fontWeight: 'bold', fontSize: 30, textAlign: 'center', color: 'white' }}>
+                                        Perfil
+                                    </Text>
+                                </View>
+                            </TouchableOpacity>
+                        </View>
+                        <View style={styles.boton} sx={{ width: [300, 600], height: [130, 200] }}>
+                            <TouchableOpacity onPress={() => navigation.navigate('SalaDeMesa', { data: {
+                                email,  
+                                cohorte,
+                                username 
+                            }})}>
+                                <Image
+                                    source={require("../assets/PairPrograming.jpg")}
+                                    style={styles.tarjeta} sx={{ width: [300, 600], height: [130, 200] }}
+                                >
+                                </Image>
+                                <View style={{ width: '100%', justifyContent: 'center' }} sx={{ height: [130, 200] }}>
+                                    <Text style={{ fontWeight: 'bold', fontSize: 30, textAlign: 'center', color: 'white' }}>
+                                        Pair Programing
+                                    </Text>
+                                </View>
+                            </TouchableOpacity>
+                        </View>
+                        <View style={styles.boton} sx={{ width: [300, 600], height: [130, 200] }}>
+                            <TouchableOpacity onPress={() => navigation.navigate('StandUp')}>
+                                <Image
+                                    source={require("../assets/standUp.jpg")}
+                                    style={styles.tarjeta} sx={{ width: [300, 600], height: [130, 200] }}
+                                >
+                                </Image>
+                                <View style={{ width: '100%', justifyContent: 'center' }} sx={{ height: [130, 200] }}>
+                                    <Text style={{ fontWeight: 'bold', fontSize: 30, textAlign: 'center', color: 'white' }}>
+                                        Stand Up
+                                    </Text>
+                                </View>
+                            </TouchableOpacity>
+                        </View>
+                        <View style={{ alignSelf: 'center' }}>
+                            <TouchableOpacity style={styles.botonCerrar} onPress={handleLogout}>
+                                <Text style={{ textAlign: 'center', fontWeight: 'bold', fontSize: 20 }}>Cerrar sesión</Text>
+                            </TouchableOpacity>
+                        </View>
                     </View>
-                    <View style={styles.boton} sx={{ width: [300, 600], height: [130, 200] }}>
-                        <TouchableOpacity onPress={() => navigation.navigate('StandUp')}>
-                            <Image
-                                source={require("../assets/standUp.jpg")}
-                                style={styles.tarjeta} sx={{ width: [300, 600], height: [130, 200] }}
-                            >
-                            </Image>
-                            <View style={{ width: '100%', justifyContent: 'center' }} sx={{ height: [130, 200] }}>
-                                <Text style={{ fontWeight: 'bold', fontSize: 30, textAlign: 'center', color: 'white' }}>
-                                    Stand Up
-                                </Text>
-                            </View>
-                        </TouchableOpacity>
-                    </View>
-                    <View style={{ alignSelf: 'center' }}>
-                        <TouchableOpacity style={styles.botonCerrar} onPress={handleLogout}>
-                            <Text style={{ textAlign: 'center', fontWeight: 'bold', fontSize: 20 }}>Cerrar sesión</Text>
-                        </TouchableOpacity>
-                    </View>
-                </View>
+                </ScrollView>
             </View>
         )
     }

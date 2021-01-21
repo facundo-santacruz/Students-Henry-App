@@ -5,22 +5,29 @@ export const styles = StyleSheet.create({
         width: '100%', 
         height: '100%', 
         backgroundColor: "black",
+        display: 'flex',
         textAlign: "center",
-        alignItems: "center"
+        alignItems: "center",
+        justifyContent: "center",
+        
     },
     container: {
         flex: 1,
         justifyContent: "center",
         alignItems: "center",
-        
     },
     botonSalir:{
         backgroundColor: 'yellow',
-        marginTop: 5
+        // marginTop: 5
+        borderRadius:20,
+        justifyContent: "center"
     },
     containerBoton: {
         display: 'flex',
         width: "100%",
+        flexDirection: "row",
+        justifyContent: 'space-around',
+        marginTop: 4
     },
     input:{
         // width: 200,
@@ -28,7 +35,8 @@ export const styles = StyleSheet.create({
         // borderBottomWidth: 'thin',
         marginLeft: 10,
         marginRight: 10,
-        textAlign: "center"
+        textAlign: "center",
+        width: "80%"
     },
     fijar:{
         alignItems: "center",
@@ -43,6 +51,7 @@ export const styles = StyleSheet.create({
     linkFijado:{
         display: "flex",
         alignItems: "center",
+        justifyContent: "center",
         backgroundColor: 'white',
         borderRadius: 10,
         margin: 15,
@@ -101,5 +110,12 @@ export const styles = StyleSheet.create({
         padding: 10, 
         fontSize: 15, 
         fontWeight: "bold"
+    },
+    containerLink: {
+        marginBottom: 2,
+        marginTop: 4,
+        backgroundColor: "gray",
+        width: "80%",
     }
+
 })

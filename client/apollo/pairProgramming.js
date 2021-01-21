@@ -36,6 +36,7 @@ export const ADD_USERMESA = gql`
         firstName
         lastName
         cohorte
+        image
       }
       dia
     }
